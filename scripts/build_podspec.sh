@@ -25,7 +25,7 @@ function usage() {
 
 upload=false
 skip_until=""
-while getopts ":u" opt; do
+while getopts ":uf:" opt; do
   case $opt in
     u)
       upload=true
@@ -106,7 +106,7 @@ EOF
   pod repo update # last chance of getting the latest versions of previous pushed pods
   if $upload; then
     echo "Uploading ${tmpdir}/${target}.podspec"
-    pod trunk push "${tmpdir}/${target}.podspec"
+    pod trunk push "${tmpdir}/${target}.podspec" --synchronous
   fi
 
 done
